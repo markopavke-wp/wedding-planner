@@ -33,8 +33,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { formatCompactEurFromRsd, formatDualMoney } from "@/lib/currency";
 import type { DashboardStats } from "@/lib/queries";
-import { formatCurrency } from "@/lib/utils";
 
 type ChartCardProps = {
   title: string;
@@ -200,7 +200,7 @@ export function DashboardCharts({ stats }: { stats: DashboardStats }) {
 
       <ChartCard
         title="Budžet po kategorijama"
-        description={`Planirana ulaganja po kategorijama · ukupno ${formatCurrency(budgetTotal)}.`}
+        description={`Planirana ulaganja po kategorijama · ukupno ${formatDualMoney(budgetTotal)}.`}
         isEmpty={budgetData.length === 0}
         emptyMessage="Unesite stavke budžeta da biste videli raspodelu troškova."
       >
@@ -225,11 +225,11 @@ export function DashboardCharts({ stats }: { stats: DashboardStats }) {
               tick={AXIS_TICK}
             />
             <YAxis
-              width={78}
+              width={64}
               tickLine={false}
               axisLine={false}
               tick={AXIS_TICK}
-              tickFormatter={(value: number) => formatCurrency(value)}
+              tickFormatter={(value: number) => formatCompactEurFromRsd(value)}
             />
             <Tooltip content={CurrencyTooltip} cursor={{ fillOpacity: 0.06 }} />
             <Bar

@@ -111,13 +111,17 @@ export function SettingsUI({
             <Field label="Datum svadbe" error={errors.wedding_date?.message}>
               <Input type="date" {...form.register("wedding_date")} />
             </Field>
-            <Field label="Planirani budžet" error={errors.planned_budget?.message}>
+            <Field label="Planirani budžet (RSD)" error={errors.planned_budget?.message}>
               <Input
                 type="number"
                 min="0"
                 step="0.01"
                 {...form.register("planned_budget")}
               />
+              <p className="mt-1 text-xs text-muted">
+                Unos u dinarima. Na budžetu i dashboardu prikazuje se i u
+                evrima (1 € = 118 RSD).
+              </p>
             </Field>
             <Field label="Sala / lokacija" error={errors.venue?.message}>
               <Input {...form.register("venue")} />

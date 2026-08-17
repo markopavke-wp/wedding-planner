@@ -3,6 +3,7 @@ import { differenceInCalendarDays, format, parseISO } from "date-fns";
 import { srLatn } from "date-fns/locale";
 import { twMerge } from "tailwind-merge";
 
+import { formatDualMoney } from "@/lib/currency";
 import type { Guest } from "@/types/database";
 
 export function cn(...inputs: ClassValue[]): string {
@@ -10,11 +11,8 @@ export function cn(...inputs: ClassValue[]): string {
 }
 
 export function formatCurrency(value: number): string {
-  return new Intl.NumberFormat("sr-RS", {
-    style: "currency",
-    currency: "EUR",
-    maximumFractionDigits: 0,
-  }).format(value);
+  // Budžet se čuva u RSD; prikaz uvek u evrima i dinarima (1 € = 118 RSD).
+  return formatDualMoney(value);
 }
 
 export function formatDate(value: string | null | undefined): string {

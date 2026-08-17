@@ -22,6 +22,7 @@ export type BudgetStatus =
   | "deposit_paid"
   | "partially_paid"
   | "paid";
+export type BudgetCurrency = "eur" | "rsd";
 export type ProfileRole = "admin" | "editor";
 
 export type Profile = {
@@ -100,6 +101,7 @@ export type BudgetItem = {
   actual_amount: number;
   paid_amount: number;
   deposit_amount: number;
+  currency: BudgetCurrency;
   due_date: string | null;
   status: BudgetStatus;
   vendor_id: string | null;
@@ -353,6 +355,7 @@ export type Database = {
           actual_amount?: number;
           paid_amount?: number;
           deposit_amount?: number;
+          currency?: BudgetCurrency;
           due_date?: string | null;
           status?: BudgetStatus;
           vendor_id?: string | null;
@@ -368,6 +371,7 @@ export type Database = {
           actual_amount?: number;
           paid_amount?: number;
           deposit_amount?: number;
+          currency?: BudgetCurrency;
           due_date?: string | null;
           status?: BudgetStatus;
           vendor_id?: string | null;
@@ -524,6 +528,7 @@ export type Database = {
       task_priority: TaskPriority;
       task_status: TaskStatus;
       budget_status: BudgetStatus;
+      budget_currency: BudgetCurrency;
     };
     CompositeTypes: Record<string, never>;
   };

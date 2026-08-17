@@ -46,7 +46,7 @@ function KpiCard({
             </p>
             <p
               className={cn(
-                "font-display text-3xl font-semibold leading-none",
+                "font-display text-xl font-semibold leading-snug sm:text-2xl",
                 danger && "text-red-600 dark:text-red-400",
               )}
             >

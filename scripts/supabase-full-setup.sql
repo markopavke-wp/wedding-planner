@@ -25,6 +25,7 @@ CREATE TYPE public.budget_status AS ENUM (
   'partially_paid',
   'paid'
 );
+CREATE TYPE public.budget_currency AS ENUM ('eur', 'rsd');
 
 -- Profiles (1:1 with auth.users)
 CREATE TABLE public.profiles (
@@ -128,6 +129,7 @@ CREATE TABLE public.budget_items (
   actual_amount numeric(12, 2) NOT NULL DEFAULT 0,
   paid_amount numeric(12, 2) NOT NULL DEFAULT 0,
   deposit_amount numeric(12, 2) NOT NULL DEFAULT 0,
+  currency public.budget_currency NOT NULL DEFAULT 'rsd',
   due_date date,
   status public.budget_status NOT NULL DEFAULT 'planned',
   vendor_id uuid REFERENCES public.vendors (id) ON DELETE SET NULL,

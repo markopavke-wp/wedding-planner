@@ -1,23 +1,17 @@
-const currencyFormatter = new Intl.NumberFormat("sr-RS", {
-  style: "currency",
-  currency: "RSD",
-  maximumFractionDigits: 0,
-});
-
-const compactFormatter = new Intl.NumberFormat("sr-RS", {
-  notation: "compact",
-  maximumFractionDigits: 1,
-});
-
-const numberFormatter = new Intl.NumberFormat("sr-RS");
+import {
+  formatCompactEurFromRsd,
+  formatDualMoney,
+} from "@/lib/currency";
 
 export function formatMoney(value: number): string {
-  return currencyFormatter.format(Math.round(value));
+  return formatDualMoney(value);
 }
 
 export function formatCompactMoney(value: number): string {
-  return compactFormatter.format(value);
+  return formatCompactEurFromRsd(value);
 }
+
+const numberFormatter = new Intl.NumberFormat("sr-RS");
 
 export function formatPercentValue(value: number): string {
   return `${numberFormatter.format(Math.round(value))}%`;

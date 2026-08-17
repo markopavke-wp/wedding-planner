@@ -14,6 +14,8 @@ export const budgetStatusSchema = z.enum([
   "paid",
 ]);
 
+export const budgetCurrencySchema = z.enum(["eur", "rsd"]);
+
 export const budgetCategories = [
   "venue",
   "food",
@@ -41,6 +43,7 @@ export const budgetCreateSchema = z.object({
   actual_amount: moneySchema.optional(),
   paid_amount: moneySchema.optional(),
   deposit_amount: moneySchema.optional(),
+  currency: budgetCurrencySchema.optional(),
   due_date: optionalDateStringSchema.optional(),
   status: budgetStatusSchema.optional(),
   vendor_id: uuidSchema.nullable().optional(),

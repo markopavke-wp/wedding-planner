@@ -209,17 +209,17 @@ export function BudgetTable({
 
                 <td className="px-3 py-4 text-muted">{formatDueDate(item.due_date)}</td>
 
-                <td className="px-3 py-4 text-right tabular-nums">
+                <td className="px-3 py-4 text-right text-xs leading-snug tabular-nums">
                   {formatMoney(Number(item.planned_amount))}
                 </td>
 
-                <td className="px-3 py-4 text-right tabular-nums">
+                <td className="px-3 py-4 text-right text-xs leading-snug tabular-nums">
                   {Number(item.actual_amount) > 0
                     ? formatMoney(Number(item.actual_amount))
                     : "—"}
                 </td>
 
-                <td className="px-3 py-4 text-right">
+                <td className="px-3 py-4 text-right text-xs leading-snug">
                   <p className="tabular-nums">{formatMoney(Number(item.paid_amount))}</p>
                   <div className="mt-1.5 flex items-center justify-end gap-2">
                     <Progress value={progress} className="h-1.5 w-16" />
@@ -236,7 +236,7 @@ export function BudgetTable({
 
                 <td
                   className={cn(
-                    "px-3 py-4 text-right tabular-nums",
+                    "px-3 py-4 text-right text-xs leading-snug tabular-nums",
                     remaining > 0 && "font-medium",
                   )}
                 >

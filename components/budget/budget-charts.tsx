@@ -160,7 +160,7 @@ export function BudgetCharts({ categories, summary }: BudgetChartsProps) {
               />
             </PieChart>
           </ResponsiveContainer>
-          <DonutCenter label="Planirano" value={formatMoney(summary.planned)} />
+          <DonutCenter label="Planirano" value={formatCompactMoney(summary.planned)} />
         </div>
         <ChartLegend
           rows={plannedCategories.map((category) => ({

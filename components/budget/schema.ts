@@ -1,5 +1,11 @@
 import { z } from "zod";
 
+import {
+  BUDGET_CURRENCY_LABELS,
+  fromRsd,
+  toRsd,
+  type BudgetCurrency,
+} from "@/lib/currency";
 import type { BudgetStatus } from "@/types/database";
 
 const AMOUNT_PATTERN = /^\d+([.,]\d{1,2})?$/;
@@ -27,6 +33,7 @@ export const budgetFormSchema = z
   .object({
     category: z.string().trim().min(1, "Kategorija je obavezna").max(100),
     description: z.string().trim().max(200, "Opis može imati najviše 200 znakova"),
+    currency: z.enum(["eur", "rsd"]),
     planned_amount: requiredAmountField,
     actual_amount: amountField,
     paid_amount: amountField,
@@ -71,6 +78,7 @@ export type BudgetFormValues = z.infer<typeof budgetFormSchema>;
 export const budgetFormDefaults: BudgetFormValues = {
   category: "venue",
   description: "",
+  currency: "rsd",
   planned_amount: "",
   actual_amount: "",
   paid_amount: "",
@@ -88,6 +96,7 @@ export interface BudgetPayload {
   actual_amount: number;
   paid_amount: number;
   deposit_amount: number;
+  currency: BudgetCurrency;
   due_date: string | null;
   status: BudgetStatus;
   vendor_id: string | null;
@@ -99,17 +108,38 @@ function nullableText(value: string): string | null {
   return trimmed.length > 0 ? trimmed : null;
 }
 
+/**
+ * Iznose iz forme pretvara u RSD za bazu. Ako je valuta EUR, množi se kursom 118.
+ */
 export function toBudgetPayload(values: BudgetFormValues): BudgetPayload {
+  const currency = values.currency;
+
   return {
     category: values.category.trim(),
     description: nullableText(values.description),
-    planned_amount: parseAmount(values.planned_amount),
-    actual_amount: parseAmount(values.actual_amount),
-    paid_amount: parseAmount(values.paid_amount),
-    deposit_amount: parseAmount(values.deposit_amount),
+    planned_amount: toRsd(parseAmount(values.planned_amount), currency),
+    actual_amount: toRsd(parseAmount(values.actual_amount), currency),
+    paid_amount: toRsd(parseAmount(values.paid_amount), currency),
+    deposit_amount: toRsd(parseAmount(values.deposit_amount), currency),
+    currency,
     due_date: values.due_date.trim() === "" ? null : values.due_date,
     status: values.status,
     vendor_id: values.vendor_id === "" ? null : values.vendor_id,
     notes: nullableText(values.notes),
   };
 }
+
+/** Za formu: kanonski RSD iznos prikaži u valuti unosa. */
+export function amountToInput(
+  amountRsd: number,
+  currency: BudgetCurrency,
+): string {
+  const value = fromRsd(Number(amountRsd), currency);
+  return value > 0 ? String(value) : "";
+}
+
+export function currencyUnitLabel(currency: BudgetCurrency): string {
+  return currency === "eur" ? "€" : "RSD";
+}
+
+export { BUDGET_CURRENCY_LABELS };
