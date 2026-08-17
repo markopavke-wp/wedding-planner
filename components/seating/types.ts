@@ -25,6 +25,20 @@ export const TABLE_SIDE_LABELS: Record<TableSide, string> = {
   mixed: "Mešovito",
 };
 
+/** Boje stolova na šemi: mlada / mladoženja / mešovito. */
+export const TABLE_SIDE_SURFACE_CLASSES: Record<TableSide, string> = {
+  bride: "border-rose-400 bg-rose-50 dark:border-rose-400/80 dark:bg-rose-950/45",
+  groom: "border-sky-500 bg-sky-50 dark:border-sky-400/80 dark:bg-sky-950/45",
+  mixed:
+    "border-amber-400 bg-amber-50 dark:border-amber-400/80 dark:bg-amber-950/40",
+};
+
+export const TABLE_SIDE_SWATCH_CLASSES: Record<TableSide, string> = {
+  bride: "bg-rose-400",
+  groom: "bg-sky-500",
+  mixed: "bg-amber-400",
+};
+
 export const GUEST_SIDE_LABELS: Record<GuestSide, string> = {
   bride: "Mlada",
   groom: "Mladoženja",

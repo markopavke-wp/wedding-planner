@@ -36,7 +36,7 @@ import {
   updateTablePosition,
 } from "@/lib/actions";
 import { cn, guestFullName, guestHeadcount } from "@/lib/utils";
-import type { Guest, SeatingTable, Wedding } from "@/types/database";
+import type { Guest, SeatingTable, TableSide, Wedding } from "@/types/database";
 
 import {
   buildSeatingAnalytics,
@@ -57,7 +57,7 @@ import {
   type SideSuggestionPreview,
 } from "./suggestion";
 import { TableDialog, type TableFormValues } from "./table-dialog";
-import { normalizeRotation, ROTATION_STEP, tableSideLabel } from "./types";
+import { normalizeRotation, ROTATION_STEP, TABLE_SIDE_LABELS, TABLE_SIDES, tableSideLabel } from "./types";
 
 type PanelTab = "guests" | "analytics" | "suggestion";
 
@@ -80,6 +80,7 @@ function SelectedTablePanel({
   occupancy,
   unassignedGuests,
   onAssignGuest,
+  onChangeSide,
   onRotate,
   onEdit,
   onDelete,
@@ -88,6 +89,7 @@ function SelectedTablePanel({
   occupancy: TableOccupancy | null;
   unassignedGuests: readonly Guest[];
   onAssignGuest: (guestId: string, tableId: string | null) => void;
+  onChangeSide: (side: TableSide | null) => void;
   onRotate: () => void;
   onEdit: () => void;
   onDelete: () => void;
@@ -104,6 +106,7 @@ function SelectedTablePanel({
           <p className="text-xs tabular-nums text-muted">
             {occupied} / {table.capacity} mesta
             {freeSeats > 0 ? ` · ${freeSeats} slobodno` : " · popunjen"}
+            {` · ${tableSideLabel(table.side)}`}
           </p>
         </div>
 
@@ -134,6 +137,25 @@ function SelectedTablePanel({
           <Trash2 className="h-4 w-4" />
           Obriši
         </Button>
+      </div>
+
+      <div className="flex flex-col gap-1.5">
+        <Label htmlFor="seating-table-side">Strana stola</Label>
+        <Select
+          id="seating-table-side"
+          value={table.side ?? "none"}
+          onChange={(event) => {
+            const value = event.target.value;
+            onChangeSide(value === "none" ? null : (value as TableSide));
+          }}
+        >
+          <option value="none">Bez strane</option>
+          {TABLE_SIDES.map((side) => (
+            <option key={side} value={side}>
+              {TABLE_SIDE_LABELS[side]}
+            </option>
+          ))}
+        </Select>
       </div>
 
       <div className="flex flex-col gap-1.5">
@@ -341,6 +363,40 @@ export function SeatingPlanner({
     [wedding.id],
   );
 
+  const changeTableSide = useCallback(
+    (table: SeatingTable, side: TableSide | null) => {
+      if (table.side === side) return;
+
+      setTables((current) =>
+        current.map((item) =>
+          item.id === table.id ? { ...item, side } : item,
+        ),
+      );
+
+      startTransition(async () => {
+        const result = await updateTable({
+          id: table.id,
+          wedding_id: wedding.id,
+          side,
+        });
+
+        if (!result.success) {
+          setTables((current) =>
+            current.map((item) => (item.id === table.id ? table : item)),
+          );
+          toast.error(result.error);
+          return;
+        }
+
+        const saved = result.data;
+        setTables((current) =>
+          current.map((item) => (item.id === saved.id ? saved : item)),
+        );
+      });
+    },
+    [wedding.id],
+  );
+
   const openEditDialog = useCallback((table: SeatingTable) => {
     setEditingTable(table);
     setTableDialogOpen(true);
@@ -529,6 +585,7 @@ export function SeatingPlanner({
                   occupancy={analytics.byTableId.get(selectedTable.id) ?? null}
                   unassignedGuests={unassignedGuests}
                   onAssignGuest={assignGuest}
+                  onChangeSide={(side) => changeTableSide(selectedTable, side)}
                   onRotate={() => rotateTable(selectedTable)}
                   onEdit={() => openEditDialog(selectedTable)}
                   onDelete={() => setTableToDelete(selectedTable)}

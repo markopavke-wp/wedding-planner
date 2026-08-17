@@ -14,7 +14,7 @@ import {
   startGuestDrag,
   useSeating,
 } from "./seating-context";
-import { TABLE_SHAPE_LABELS, TABLE_SIDE_LABELS } from "./types";
+import { TABLE_SHAPE_LABELS, TABLE_SIDE_SURFACE_CLASSES } from "./types";
 
 export type TableNodeData = {
   table: SeatingTable;
@@ -163,7 +163,11 @@ function TableNodeComponent({ data, selected }: NodeProps<TableFlowNode>) {
         className={cn(
           "absolute inset-0 border-2 bg-card shadow-soft transition",
           table.shape === "round" ? "rounded-full" : "rounded-2xl",
-          isHeadTable ? "border-accent bg-accent-soft" : "border-border",
+          table.side !== null
+            ? TABLE_SIDE_SURFACE_CLASSES[table.side]
+            : isHeadTable
+              ? "border-accent bg-accent-soft"
+              : "border-border",
           isOverCapacity && "border-destructive",
           !isOverCapacity && isFull && "border-warning",
           selected && "ring-4 ring-accent/25",
@@ -205,8 +209,19 @@ function TableNodeComponent({ data, selected }: NodeProps<TableFlowNode>) {
             Prepunjeno
           </span>
         ) : table.side !== null ? (
-          <span className="text-[10px] uppercase tracking-wider text-muted">
-            {TABLE_SIDE_LABELS[table.side]}
+          <span
+            className={cn(
+              "rounded-full px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider",
+              table.side === "bride" && "bg-rose-200/80 text-rose-900 dark:bg-rose-900/60 dark:text-rose-100",
+              table.side === "groom" && "bg-sky-200/80 text-sky-900 dark:bg-sky-900/60 dark:text-sky-100",
+              table.side === "mixed" && "bg-amber-200/80 text-amber-950 dark:bg-amber-900/60 dark:text-amber-100",
+            )}
+          >
+            {table.side === "bride"
+              ? "Mlada"
+              : table.side === "groom"
+                ? "Mladoženja"
+                : "Mešovito"}
           </span>
         ) : null}
       </div>
