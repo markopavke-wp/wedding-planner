@@ -773,8 +773,8 @@ export function SeatingPlanner({
             <p className="text-sm text-muted">{preview.summary}</p>
 
             <div className="scrollbar-slim max-h-80 overflow-y-auto rounded-2xl border border-border">
-              <table className="w-full text-sm">
-                <thead className="bg-secondary text-left text-xs uppercase tracking-wide text-muted">
+              <table className="table-sticky-head w-full text-sm [--table-head-bg:var(--secondary)]">
+                <thead className="text-left text-xs uppercase tracking-wide text-muted">
                   <tr>
                     <th className="px-3 py-2 font-medium">Sto</th>
                     <th className="px-3 py-2 font-medium">Sada</th>

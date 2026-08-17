@@ -121,9 +121,9 @@ export function BudgetTable({
   }
 
   return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full text-left text-sm">
-        <thead className="border-b border-border text-muted">
+    <div className="scrollbar-slim max-h-[70vh] overflow-auto">
+      <table className="table-sticky-head table-sticky-foot min-w-full text-left text-sm">
+        <thead className="text-muted">
           <tr>
             <SortHeader
               column="category"
@@ -294,7 +294,7 @@ export function BudgetTable({
           })}
         </tbody>
 
-        <tfoot className="border-t border-border font-medium">
+        <tfoot className="font-medium">
           <tr>
             <td className="px-3 py-4" colSpan={3}>
               Ukupno ({items.length})

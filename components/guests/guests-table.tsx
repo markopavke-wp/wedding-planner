@@ -87,10 +87,10 @@ export function GuestsTable({
 }: GuestsTableProps) {
   return (
     <div className="card-premium hidden overflow-hidden lg:block">
-      <div className="overflow-x-auto scrollbar-slim">
-        <table className="min-w-full text-left text-sm">
+      <div className="scrollbar-slim max-h-[70vh] overflow-auto">
+        <table className="table-sticky-head min-w-full text-left text-sm">
           <thead>
-            <tr className="border-b border-border text-xs font-semibold uppercase tracking-wide text-muted">
+            <tr className="text-xs font-semibold uppercase tracking-wide text-muted">
               <th scope="col" className="w-10 px-4 py-3">
                 <input
                   type="checkbox"
