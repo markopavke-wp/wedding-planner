@@ -76,7 +76,7 @@ export function GuestFormDialog({
       className="max-w-2xl"
     >
       <form className="space-y-5" onSubmit={handleSubmit(onSubmit)} noValidate>
-        <div className="max-h-[65vh] space-y-5 overflow-y-auto pr-1">
+        <div className="space-y-5">
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
               <Label htmlFor="guest-first-name">Ime</Label>

@@ -328,7 +328,7 @@ export function BudgetFormDialog({
           <Textarea id="budget-notes" {...register("notes")} />
         </Field>
 
-        <div className="flex justify-end gap-3 sm:col-span-2">
+        <div className="flex flex-col-reverse gap-3 sm:col-span-2 sm:flex-row sm:justify-end">
           <Button
             type="button"
             variant="outline"
