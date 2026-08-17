@@ -1,0 +1,259 @@
+@import "tailwindcss";
+
+/* next-themes toggles a class on <html>, so `dark:` must follow the class, not the OS. */
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: #faf9f7;
+  --foreground: #1c1917;
+  --card: #ffffff;
+  --card-foreground: #1c1917;
+  --muted: #78716c;
+  --muted-foreground: #78716c;
+  --border: #e7e5e4;
+  --input: #e7e5e4;
+  --ring: #be123c;
+  --accent: #be123c;
+  --accent-soft: #fff1f2;
+  --accent-foreground: #ffffff;
+  --primary: #be123c;
+  --primary-foreground: #ffffff;
+  --secondary: #f5f5f4;
+  --secondary-foreground: #44403c;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --success: #15803d;
+  --success-foreground: #ffffff;
+  --warning: #b45309;
+  --warning-foreground: #ffffff;
+  --popover: #ffffff;
+  --popover-foreground: #1c1917;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #44403c;
+  --sidebar-primary: #be123c;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #fff1f2;
+  --sidebar-accent-foreground: #9f1239;
+  --sidebar-border: #e7e5e4;
+  --sidebar-ring: #be123c;
+  --shadow-soft: 0 1px 2px rgb(28 25 23 / 4%), 0 8px 24px rgb(28 25 23 / 6%);
+  --shadow-elevated: 0 4px 6px rgb(28 25 23 / 6%), 0 16px 40px rgb(28 25 23 / 10%);
+}
+
+.dark {
+  --background: #0c0a09;
+  --foreground: #fafaf9;
+  --card: #1c1917;
+  --card-foreground: #fafaf9;
+  --muted: #a8a29e;
+  --muted-foreground: #a8a29e;
+  --border: #292524;
+  --input: #292524;
+  --ring: #fb7185;
+  --accent: #fb7185;
+  --accent-soft: #43141f;
+  --accent-foreground: #1c1917;
+  --primary: #fb7185;
+  --primary-foreground: #1c1917;
+  --secondary: #292524;
+  --secondary-foreground: #fafaf9;
+  --destructive: #f87171;
+  --destructive-foreground: #1c1917;
+  --success: #4ade80;
+  --success-foreground: #1c1917;
+  --warning: #fbbf24;
+  --warning-foreground: #1c1917;
+  --popover: #1c1917;
+  --popover-foreground: #fafaf9;
+  --sidebar: #171412;
+  --sidebar-foreground: #e7e5e4;
+  --sidebar-primary: #fb7185;
+  --sidebar-primary-foreground: #1c1917;
+  --sidebar-accent: #43141f;
+  --sidebar-accent-foreground: #fecdd3;
+  --sidebar-border: #292524;
+  --sidebar-ring: #fb7185;
+  --shadow-soft: 0 1px 2px rgb(0 0 0 / 25%), 0 8px 24px rgb(0 0 0 / 35%);
+  --shadow-elevated: 0 4px 6px rgb(0 0 0 / 30%), 0 16px 40px rgb(0 0 0 / 45%);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --shadow-soft: var(--shadow-soft);
+  --shadow-elevated: var(--shadow-elevated);
+  --font-sans: var(--font-cormorant), ui-serif, Georgia, serif;
+  --font-ui: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --animate-fade-in: fade-in 160ms ease-out;
+  --animate-fade-out: fade-out 140ms ease-in;
+  --animate-pop-in: pop-in 160ms cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-pop-out: pop-out 120ms ease-in;
+  --animate-slide-in-left: slide-in-left 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-slide-out-left: slide-out-left 200ms ease-in;
+  --animate-slide-in-right: slide-in-right 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-slide-out-right: slide-out-right 200ms ease-in;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(-0.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes pop-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out-right {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--accent) 20%, transparent);
+}
+
+.font-display {
+  font-family: var(--font-sans);
+}
+
+.card-premium {
+  border: 1px solid color-mix(in oklab, var(--border) 80%, transparent);
+  background: var(--card);
+  border-radius: 1.25rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.surface-gradient {
+  background:
+    radial-gradient(circle at top right, color-mix(in oklab, var(--accent-soft) 70%, transparent), transparent 42%),
+    var(--background);
+}
+
+.scrollbar-slim {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklab, var(--border) 80%, transparent) transparent;
+}
+
+.scrollbar-slim::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-slim::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background: color-mix(in oklab, var(--border) 80%, transparent);
+}
+
+.react-flow__node {
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+.react-flow__controls button {
+  border-radius: 0.75rem !important;
+}

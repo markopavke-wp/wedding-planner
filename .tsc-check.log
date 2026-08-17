@@ -1,0 +1,36 @@
+components/budget/budget-ui.tsx(23,30): error TS2307: Cannot find module './budget-charts' or its corresponding type declarations.
+components/budget/budget-ui.tsx(24,31): error TS2307: Cannot find module './budget-filters' or its corresponding type declarations.
+components/budget/budget-ui.tsx(25,34): error TS2307: Cannot find module './budget-form-dialog' or its corresponding type declarations.
+components/budget/budget-ui.tsx(26,32): error TS2307: Cannot find module './budget-kpi-cards' or its corresponding type declarations.
+components/budget/budget-ui.tsx(27,29): error TS2307: Cannot find module './budget-table' or its corresponding type declarations.
+components/budget/budget-ui.tsx(28,35): error TS2307: Cannot find module './constants' or its corresponding type declarations.
+components/budget/budget-ui.tsx(29,45): error TS2307: Cannot find module './format' or its corresponding type declarations.
+components/budget/budget-ui.tsx(30,36): error TS2307: Cannot find module './schema' or its corresponding type declarations.
+components/budget/budget-ui.tsx(31,48): error TS2307: Cannot find module './types' or its corresponding type declarations.
+components/budget/budget-ui.tsx(42,8): error TS2307: Cannot find module './utils' or its corresponding type declarations.
+components/budget/budget-ui.tsx(103,14): error TS7006: Parameter 'current' implicitly has an 'any' type.
+components/guests/guests-table.tsx(15,8): error TS2307: Cannot find module '@/components/guests/guest-filters' or its corresponding type declarations.
+components/guests/guests-table.tsx(22,8): error TS2307: Cannot find module '@/components/guests/guest-labels' or its corresponding type declarations.
+components/seating/seating-planner.tsx(20,60): error TS2307: Cannot find module './analytics' or its corresponding type declarations.
+components/seating/seating-planner.tsx(21,32): error TS2307: Cannot find module './analytics-panel' or its corresponding type declarations.
+components/seating/seating-planner.tsx(23,31): error TS2307: Cannot find module './seating-canvas' or its corresponding type declarations.
+components/seating/seating-planner.tsx(24,34): error TS2307: Cannot find module './suggestion-dialog' or its corresponding type declarations.
+components/seating/seating-planner.tsx(25,62): error TS2307: Cannot find module './suggestions' or its corresponding type declarations.
+components/seating/seating-planner.tsx(26,28): error TS2305: Module '"./table-dialog"' has no exported member 'TableFormPayload'.
+components/seating/seating-planner.tsx(27,28): error TS2307: Cannot find module './table-panel' or its corresponding type declarations.
+components/seating/seating-planner.tsx(28,34): error TS2307: Cannot find module './unassigned-guests' or its corresponding type declarations.
+components/seating/seating-planner.tsx(246,35): error TS7006: Parameter 'change' implicitly has an 'any' type.
+components/seating/seating-planner.tsx(258,22): error TS7006: Parameter 'change' implicitly has an 'any' type.
+components/seating/seating-planner.tsx(260,17): error TS2345: Argument of type '(current: SeatingTable[]) => { side: {} | null; id: string; wedding_id: string; name: string; capacity: number; shape: TableShape; position_x: number; position_y: number; ... 4 more ...; created_at: string; }[]' is not assignable to parameter of type 'SetStateAction<SeatingTable[]>'.
+  Type '(current: SeatingTable[]) => { side: {} | null; id: string; wedding_id: string; name: string; capacity: number; shape: TableShape; position_x: number; position_y: number; ... 4 more ...; created_at: string; }[]' is not assignable to type '(prevState: SeatingTable[]) => SeatingTable[]'.
+    Type '{ side: {} | null; id: string; wedding_id: string; name: string; capacity: number; shape: TableShape; position_x: number; position_y: number; width: number | null; height: number | null; rotation: number; notes: string | null; created_at: string; }[]' is not assignable to type 'SeatingTable[]'.
+      Type '{ side: {} | null; id: string; wedding_id: string; name: string; capacity: number; shape: TableShape; position_x: number; position_y: number; width: number | null; height: number | null; rotation: number; notes: string | null; created_at: string; }' is not assignable to type 'SeatingTable'.
+        Types of property 'side' are incompatible.
+          Type '{} | null' is not assignable to type 'TableSide | null'.
+            Type '{}' is not assignable to type 'TableSide | null'.
+components/seating/seating-planner.tsx(307,29): error TS7006: Parameter 'guestId' implicitly has an 'any' type.
+components/seating/seating-planner.tsx(326,29): error TS7006: Parameter 'guestId' implicitly has an 'any' type.
+components/seating/seating-planner.tsx(327,27): error TS7006: Parameter 'guestId' implicitly has an 'any' type.
+components/seating/seating-planner.tsx(343,9): error TS2322: Type '{ open: boolean; onOpenChange: (open: boolean) => void; table: SeatingTable | null; pending: boolean; onSubmit: (payload: TableFormPayload) => void; }' is not assignable to type 'IntrinsicAttributes & { open: boolean; mode: "create" | "edit"; initialValues: TableFormValues; isSaving: boolean; onOpenChange: (open: boolean) => void; onSubmit: (values: TableFormValues) => void; }'.
+  Property 'table' does not exist on type 'IntrinsicAttributes & { open: boolean; mode: "create" | "edit"; initialValues: TableFormValues; isSaving: boolean; onOpenChange: (open: boolean) => void; onSubmit: (values: TableFormValues) => void; }'.
+components/seating/seating-planner.tsx(350,24): error TS7006: Parameter 'open' implicitly has an 'any' type.
