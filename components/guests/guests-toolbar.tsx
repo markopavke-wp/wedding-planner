@@ -13,7 +13,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
+import { cn } from "@/lib/utils";
 import type { GuestGroup, GuestSide, InvitationStatus, SeatingTable } from "@/types/database";
+
+/** Preko ovoliko mesta u jednoj kategoriji prikaz se crveni kao upozorenje. */
+const SEAT_WARNING_THRESHOLD = 55;
 
 export type GuestFilters = {
   search: string;
@@ -67,6 +71,7 @@ type GuestsToolbarProps = {
   sortDirection: SortDirection;
   tables: SeatingTable[];
   filteredCount: number;
+  filteredHeadcount: number;
   totalCount: number;
   hasActiveFilters: boolean;
   onFilterChange: (patch: Partial<GuestFilters>) => void;
@@ -81,6 +86,7 @@ export function GuestsToolbar({
   sortDirection,
   tables,
   filteredCount,
+  filteredHeadcount,
   totalCount,
   hasActiveFilters,
   onFilterChange,
@@ -92,6 +98,8 @@ export function GuestsToolbar({
     SORT_OPTIONS.find(
       (option) => option.key === sortKey && option.direction === sortDirection,
     )?.value ?? "name-asc";
+
+  const isOverCapacity = filteredHeadcount > SEAT_WARNING_THRESHOLD;
 
   return (
     <section className="card-premium space-y-4 p-4 sm:p-5">
@@ -182,6 +190,24 @@ export function GuestsToolbar({
           Prikazano <span className="font-medium text-foreground">{filteredCount}</span>{" "}
           od {totalCount} gostiju
           {hasActiveFilters ? " (filtrirano)" : ""}
+          <span className="mx-2" aria-hidden>
+            •
+          </span>
+          Zauzeto{" "}
+          <span
+            className={cn(
+              "font-medium",
+              isOverCapacity ? "text-destructive" : "text-foreground",
+            )}
+            title={
+              isOverCapacity
+                ? `Prekoračen limit od ${SEAT_WARNING_THRESHOLD} mesta`
+                : undefined
+            }
+          >
+            {filteredHeadcount}
+          </span>{" "}
+          {filteredHeadcount === 1 ? "mesto" : "mesta"}
         </p>
 
         <div className="flex flex-wrap items-center gap-2">

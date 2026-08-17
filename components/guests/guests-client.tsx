@@ -218,6 +218,11 @@ export function GuestsClient({ weddingId, guests, tables }: GuestsClientProps) {
     });
   }, [filteredGuests, sortDirection, sortKey, tableNames]);
 
+  const filteredHeadcount = useMemo(
+    () => filteredGuests.reduce((total, guest) => total + guestHeadcount(guest), 0),
+    [filteredGuests],
+  );
+
   const pageCount = Math.max(1, Math.ceil(sortedGuests.length / pageSize));
   const currentPage = Math.min(page, pageCount);
   const pageStart = (currentPage - 1) * pageSize;
@@ -486,6 +491,7 @@ export function GuestsClient({ weddingId, guests, tables }: GuestsClientProps) {
         sortDirection={sortDirection}
         tables={tables}
         filteredCount={sortedGuests.length}
+        filteredHeadcount={filteredHeadcount}
         totalCount={guests.length}
         hasActiveFilters={hasActiveFilters}
         onFilterChange={handleFilterChange}
